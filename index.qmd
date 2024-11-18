@@ -24,6 +24,7 @@ We chose this topic partially because of its highly structured data, and because
 2.  How do player win rates vary by game mode, and are there any modes where losses significantly outweigh wins?
 3.  What are the typical lengths of matches, and are there clear patterns tied to specific game modes?
 4.  Are there any gamemodes that are both fast, and more frequently provide wins, especially if a certain brawler is used by the individual player, or team?
+5.  How do win rates compare to pick rate for each brawler (do the more popular brawlers have higher win rates)?
 
 **Why this matters:**
 
