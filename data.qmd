@@ -37,11 +37,7 @@ In the current dataset, we are facing the following challenges:
     -   The dataset reflects an older version of Brawl Stars (updated July 2021). For instance:
         -   Brawler levels max out at 10 (current cap is 11).
         -   Certain battle modes, such as `type`, are ambiguous and undefined; the official "ranked" mode was released earlier this year (2024), however, the 2021 data cites ranked versus casual play in `type`.
-2.  **Null and Missing Values**:
-    -   Some rows have missing player names or brawler details.
-    -   `power_level` should never be null, since all brawlers have a power level between 1 and 11 (10 in the data), however, there are many null power levels in the data.
-    -   Similarly, undefined values in `battle_mode` and `battle_result` raise questions about data quality.
-3.  **Ambiguities in Game Modes**:
+2.  **Ambiguities in Game Modes**:
     -   Some modes, like `type` do not translate directly to known categories and may be excluded from mode-specific analysis.
 
 ### Summary of Columns:
@@ -66,8 +62,9 @@ Our dataset has detailed logs of matches, including:
 
 ```{r}
 # load necessary libraries
+
 library(ggplot2)
-library(dplyr)
+suppressPackageStartupMessages(library(dplyr))
 library(tidyr)
 
 data<- read.csv("battles_data_full.csv")
@@ -99,5 +96,8 @@ ggplot(null_power_levels, aes(x = reorder(battle_mode, -n), y = n)) +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"), axis.text.x = element_text(size = 10, angle = 45, hjust = 1), axis.title = element_text(size = 12))
 ```
-
-\*Should add commentary of graphs
+**Null and Missing Values**:  
+    -   Some rows have missing player names or brawler details.  
+    -   'power_level' usually should never be null, since all brawlers have a power level between 1 and 11 (10 in the data), however, there are many null power levels in the data.  
+    -   In most game modes, there are three brawlers per team, and the data contains the 'power_level' for each brawler. However, soloShowdown and duoShowdown only have 1 and 2 brawlers per team respectively, so it is expected for those modes to have more null values.  
+    -   Similarly, undefined values in 'battle_mode' and 'battle_result' raise questions about data quality.
