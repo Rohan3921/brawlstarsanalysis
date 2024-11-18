@@ -6,11 +6,11 @@ execute:
   echo: true
 
 book:
-  title: "YOUR PROJECT TITLE"
+  title: "Brawl Stars Analysis"
   author:
-    - AUTHOR1 (UNI1)
-    - AUTHOR2 (UNI2)
-  repo-url: https://github.com/YOUR_GITHUB_ACCOUNT/REPO_NAME
+    - "Rohan Mathur (rnm2133)"
+    - "Cyrus Kurd (ck3271)"
+  repo-url: https://github.com/Rohan3921/brawlstarsanalysis.git
   date: today
   page-footer:
     right: |

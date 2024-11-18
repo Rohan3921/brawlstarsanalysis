@@ -2,7 +2,7 @@
 title: "index.qmd"
 format: html
 editor: visual
-"Explain why you chose this topic, and the questions you are interested in studying. Provide context for readers who are not familiar with the topic"
+#"Explain why you chose this topic, and the questions you are interested in studying. Provide context for readers who are not familiar with the topic"
 ---
 
 # Introduction

@@ -3,13 +3,13 @@ title: "data.qmd"
 format: html
 editor: visual
 
-"2.1 Technical description:
-Identify one or more data sources (see II. D. above) that you propose to draw on for the project. For each, describe how the data are collected and by whom. Describe the format of the data, the frequency of updates, dimensions, and any other relevant information. Note any issues / problems with the data, either known or that you discover. Explain how you plan to import the data. Carefully document your sources with links to the precise data sources that you used. If that is not possible (for example if your data is not available online, then explain that clearly.)
-(suggested: 1/2 page)
+#"2.1 Technical description:
+#Identify one or more data sources (see II. D. above) that you propose to draw on for the project. For each, describe how the data are collected and by whom. Describe the format of the data, the frequency of updates, dimensions, and any other relevant information. Note any issues / problems with the data, either known or that you discover. Explain how you plan to import the data. Carefully document your sources with links to the precise data sources that you used. If that is not possible (for example if your data is not available online, then explain that clearly.)
+#(suggested: 1/2 page)
 
-2.2 Missing value analysis:
-Describe any patterns you discover in missing values. If no values are missing, graphs should still be included showing that.
-(suggested: 2 graphs plus commentary)"
+#2.2 Missing value analysis:
+#Describe any patterns you discover in missing values. If no values are missing, graphs should still be included showing that.
+#(suggested: 2 graphs plus commentary)"
 ---
 
 # Data
@@ -70,6 +70,7 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
+data<- read.csv("battles_data_full.csv")
 # calculate missing values for each column
 missing_values <- data |> 
   summarise(across(everything(), ~ sum(is.na(.)))) |> 
