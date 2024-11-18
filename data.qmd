@@ -1,5 +1,102 @@
+---
+title: "data.qmd"
+format: html
+editor: visual
+
+"2.1 Technical description:
+Identify one or more data sources (see II. D. above) that you propose to draw on for the project. For each, describe how the data are collected and by whom. Describe the format of the data, the frequency of updates, dimensions, and any other relevant information. Note any issues / problems with the data, either known or that you discover. Explain how you plan to import the data. Carefully document your sources with links to the precise data sources that you used. If that is not possible (for example if your data is not available online, then explain that clearly.)
+(suggested: 1/2 page)
+
+2.2 Missing value analysis:
+Describe any patterns you discover in missing values. If no values are missing, graphs should still be included showing that.
+(suggested: 2 graphs plus commentary)"
+---
+
 # Data
 
-## Description
+## 2.1 Technical Description
 
-## Missing value analysis
+The dataset used for this project contains detailed logs of matches from the mobile game Brawl Stars, developed by Supercell. The data provides valuable insights into gameplay mechanics, player behavior, and match outcomes.
+
+### Key Information:
+
+-   **Source**: The dataset was obtained from [Kaggle](https://www.kaggle.com/datasets/sirwerto/brawlstars-battlelog/data), where it was shared in JSON format.
+-   **Format**: Our preprocessed dataset is in CSV format, with 40+ columns capturing details about players, brawlers, match outcomes, and game modes.
+-   **Size**: 100,000+ rows, with each row reflecting a different match.
+-   **Preprocessing**:
+    -   JSON data was restructured into CSV format.
+    -   Null values and inconsistent entries were identified for cleanup.
+
+### Challenges:
+
+We are also pursuing gathering our own data via API, but gathering such a sizeable dataset is challenging since real player IDs must be individually specified, unless we access player IDs via the top rankings table, in which case, the data will be heavily skewed towards high skilled, high trophy game play which is different from how many/most players play.
+
+In the current dataset, we are facing the following challenges:
+
+1.  **Outdated Data**:
+    -   The dataset reflects an older version of Brawl Stars (updated July 2021). For instance:
+        -   Brawler levels max out at 10 (current cap is 11).
+        -   Certain battle modes, such as `type`, are ambiguous and undefined; the official "ranked" mode was released earlier this year (2024), however, the 2021 data cites ranked versus casual play in `type`.
+2.  **Null and Missing Values**:
+    -   Some rows have missing player names or brawler details.
+    -   `power_level` should never be null, since all brawlers have a power level between 1 and 11 (10 in the data), however, there are many null power levels in the data.
+    -   Similarly, undefined values in `battle_mode` and `battle_result` raise questions about data quality.
+3.  **Ambiguities in Game Modes**:
+    -   Some modes, like `type` do not translate directly to known categories and may be excluded from mode-specific analysis.
+
+### Summary of Columns:
+
+Our dataset has detailed logs of matches, including:
+
+1.  Player & brawler information
+    1.  Names & IDs of players across all teams
+    2.  Brawler levels
+    3.  Star player details
+2.  Battle information
+    1.  Event IDs
+    2.  Map information
+3.  Match duration
+4.  Trophy changes
+
+------------------------------------------------------------------------
+
+## 2.2 Missing Value Analysis
+
+### Missing Values by Column
+
+```{r}
+# load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# calculate missing values for each column
+missing_values <- data |> 
+  summarise(across(everything(), ~ sum(is.na(.)))) |> 
+  pivot_longer(cols = everything(), names_to = 'column', values_to = 'missing_count')
+
+# visualize missing values with improved label handling
+ggplot(missing_values, aes(x = reorder(column, missing_count), y = missing_count)) +
+  geom_bar(stat = 'identity', fill = 'steelblue', color = 'black', width = 0.7) +
+  coord_flip() +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.3))) + # add a small space above bars 
+  labs(title = 'Missing Values by Column', x = 'Column Name', y = 'Count of Missing Values') +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5, size = 14, face = 'bold'), axis.text.y = element_text(size = 8, angle = 0, hjust = 1), axis.text.x = element_text(size = 10), axis.title = element_text(size = 12))
+```
+
+```{r}
+# filter null power levels
+null_power_levels <- data |> 
+  filter(is.na(team_1_player_1_brawler_power)) |> 
+  count(battle_mode)
+
+# plot null power levels across battle modes
+ggplot(null_power_levels, aes(x = reorder(battle_mode, -n), y = n)) +
+  geom_bar(stat = "identity", fill = "orange", color = "black", width = 0.7) +
+  labs(title = "Frequency of Null Power Levels by Battle Mode", x = "Battle Mode", y = "Count of Null Power Levels") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"), axis.text.x = element_text(size = 10, angle = 45, hjust = 1), axis.title = element_text(size = 12))
+```
+
+\*Should add commentary of graphs

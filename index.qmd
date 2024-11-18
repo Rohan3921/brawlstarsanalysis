@@ -1,1 +1,34 @@
+---
+title: "index.qmd"
+format: html
+editor: visual
+"Explain why you chose this topic, and the questions you are interested in studying. Provide context for readers who are not familiar with the topic"
+---
+
 # Introduction
+
+Our project revolves around the game Brawl Stars, a popular mobile game by Supercell. We plan to explore the data to uncover trends and insights into gameplay, perhaps better understanding player behavior and how they impact results and therefore should inform player strategies.
+
+We chose this topic partially because of its highly structured data, and because of its popularity and the potential appeal to other players of a statistical or computational analysis of game mechanics.
+
+**For those unfamiliar with the game!**
+
+1.  Players select a "brawler" a unique character with certain abilities. Brawlers have a "power level" that can be upgraded by collecting power points and spending in-game coins and gems. This improves their strength, like health and damage.
+2.  They participate in various game modes, such as Brawl Ball, Gem Grab, and Heist. Each has a distinct objective.
+3.  All game modes are multiplayer, with 6-10 players per game. Some game modes are individual, and some are team-based. For team-based games, one player is recognized as the "star player" based on a somehow outstanding performance. This can be due to: high damage dealt, high contribution to the team goals/success (ie scoring a goal, dealing damage to the safe).
+4.  Winning or losing a game affects trophy count, which is a sort of ranking of skill level or progression in the game.
+
+**Some questions we're interested in answering include:**
+
+1.  Which brawlers are most frequently used by players, and how does this change across different game modes?
+2.  How do player win rates vary by game mode, and are there any modes where losses significantly outweigh wins?
+3.  What are the typical lengths of matches, and are there clear patterns tied to specific game modes?
+4.  Are there any gamemodes that are both fast, and more frequently provide wins, especially if a certain brawler is used by the individual player, or team?
+
+**Why this matters:**
+
+-   Players can better strategize on how to progress in the game faster, if certain brawlers, or game modes are more favorable towards faster progress (shorter match times, higher win rate for certain brawlers, etc).
+
+-   Understanding player preferences and performance trends can offer valuable insights for developers seeking to balance the game and improve player satisfaction.
+
+This introduction is the basis of our exploratory data analysis, which will delve deeper into the dataset to address our research questions.
