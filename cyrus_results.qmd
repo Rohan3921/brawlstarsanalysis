@@ -1,0 +1,320 @@
+---
+title: "3 Results"
+format: html
+editor: visual
+---
+
+# 3 Results
+
+This section highlights key findings from our exploratory data analysis (EDA) on the Brawl Stars dataset.
+
+## 3.1 Which brawlers are most frequently used by players, and how does this change across different game modes?
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(forcats)
+
+# read in and prep the data
+data <- read.csv("battles_data_full.csv")
+
+# function to do the opposite of %in% (%!in%)
+'%!in%' <- function(x,y)!('%in%'(x,y))
+
+# Filter out unwanted battle modes and ensure all brawler name columns are non-empty
+data <- data |> 
+  filter(
+    battle_mode %!in% c("soloShowdown", "roboRumble", "loneStar", "duoShowdown", "bigGame"),
+    team_1_player_1_brawler_name != '',
+    team_1_player_2_brawler_name != '',
+    team_1_player_3_brawler_name != '',
+    team_2_player_1_brawler_name != '',
+    team_2_player_2_brawler_name != '',
+    team_2_player_3_brawler_name != '',
+    star_player_brawler_name != ''
+  ) |>
+  drop_na()
+
+# Brawler usage frequency by game mode
+brawler_usage <- data |> 
+  group_by(battle_mode, star_player_brawler_name) |> 
+  summarise(count = n(), .groups = 'drop') 
+
+# Select top 10 brawlers per mode
+top_brawlers <- brawler_usage |> 
+  group_by(battle_mode) |> 
+  slice_max(order_by = count, n = 10) |> 
+  ungroup()
+
+# Use fct_infreq to ensure descending order of bars
+top_brawlers <- top_brawlers |> 
+  mutate(star_player_brawler_name = fct_infreq(star_player_brawler_name))
+
+# Plot with fct_infreq ensuring correct order
+ggplot(top_brawlers, aes(x = star_player_brawler_name, y = count, fill = battle_mode)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  facet_wrap(~battle_mode, scales = 'free_y') +
+  labs(title = 'Top 10 Star Player Brawlers by Frequency in Each Game Mode', 
+       x = 'Brawler', 
+       y = 'Frequency') +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## 3.2 How do player win rates vary by game mode?
+
+```{r, warning=FALSE}
+
+# win rates by game mode
+win_rates <- data |> group_by(battle_mode) |> summarise(win_rate = mean (battle_result == "victory"), .groups = 'drop')
+
+# visualize win rates
+ggplot(win_rates, aes(x = reorder(battle_mode, win_rate), y = win_rate, fill = battle_mode)) + 
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  labs(title = 'Player Win Rates by Game Mode', x = 'Game Mode', y = 'Win Rate') +
+  theme_minimal()
+
+# win rates by game mode
+win_rates <- data |> 
+  group_by(battle_mode) |> 
+  summarise(win_rate = mean(battle_result == "victory"), .groups = 'drop')
+
+# visualize win rates as diverging chart
+ggplot(win_rates, aes(x = reorder(battle_mode, win_rate), y = win_rate - 0.5, fill = win_rate)) +
+  geom_bar(stat = 'identity') +
+  scale_fill_gradient2(low = "red", mid = "gray", high = "forestgreen", midpoint = 0.5) +
+  coord_flip() +
+  labs(
+    title = 'Player Win Rates by Game Mode',
+    x = 'Game Mode',
+    y = 'Deviation from 50% Win Rate'
+  ) +
+  theme_minimal()
+```
+
+## 3.3 What are the typical lengths of matches, and are there patterns tied to specific game modes?
+
+```{r, warning=FALSE}
+library(viridis)
+library(viridisLite);
+
+ggplot(data, aes(x = reorder(battle_mode, battle_duration), y = battle_duration, fill = battle_mode)) +
+  geom_boxplot(outlier.shape = NA) +
+  scale_fill_viridis(discrete = TRUE) +
+  coord_flip() +
+  labs(title = 'Match Durations by Game Mode', x = 'Game Mode', y = 'Duration (seconds)') +
+  theme_minimal()
+```
+
+## 3.4 Are there game modes that are both fast and frequently provide wins?
+
+```{r, warning=FALSE}
+
+# calculate average match duration
+match_duration <- data |> 
+  group_by(battle_mode) |> 
+  summarise(avg_duration = mean(battle_duration, na.rm = TRUE), .groups = 'drop')
+
+# combine win rates and match durations
+combined_metrics <- win_rates |> 
+  inner_join(match_duration, by = "battle_mode")
+
+# visualize combined metrics
+ggplot(combined_metrics, aes(x = avg_duration, y = win_rate, label = battle_mode)) +
+  geom_point(size = 4, color = 'forestgreen') +
+  geom_text(vjust = -1, size = 3) +
+  labs(title = 'Win Rate vs. Average Match Duration', x = 'Average Match Duration (seconds)', y = 'Win Rate', subtitle = 'Modes with higher win rates and shorter durations are better for quick trophies') +
+  theme_minimal()
+```
+
+## 3.5 How do win rates compare to pick rates for each brawler?
+
+```{r, warning=FALSE}
+
+library(plotly)
+
+# calculate pick rates
+pick_rate <- brawler_usage |> 
+  group_by(star_player_brawler_name) |> 
+  summarise(pick_rate = sum(count) / nrow(data), .groups = 'drop')
+
+# calculate win rates for brawlers
+brawler_win_rate <- data |> 
+  group_by(star_player_brawler_name) |> 
+  summarise(win_rate = mean(battle_result == "victory"), .groups = 'drop')
+
+# merge pick and win rates
+pick_win_rates <- pick_rate |> 
+  inner_join(brawler_win_rate, by = 'star_player_brawler_name')
+
+# visualize pick vs. win rates with Plotly
+plot_ly(
+  pick_win_rates,
+  x = ~pick_rate,
+  y = ~win_rate,
+  text = ~star_player_brawler_name,
+  type = 'scatter',
+  mode = 'markers+text',
+  marker = list(size = 10, color = 'orange'),
+  textposition = 'top center'
+) |>
+  layout(
+    title = 'Pick Rate vs. Win Rate by Brawler',
+    xaxis = list(title = 'Pick Rate'),
+    yaxis = list(title = 'Win Rate')
+  )
+```
+
+## 3.6 Distribution of Trophy Changes by Game Mode
+
+```{r, warning=FALSE}
+
+ggplot(data, aes(x = trophy_change, fill = battle_mode)) +
+  geom_histogram(binwidth = 5, color = 'black', alpha = 0.7) +
+  facet_wrap(~battle_mode, scales = 'free_y') +
+  labs(
+    title = 'Distribution of Trophy Changes by Game Mode',
+    x = 'Trophy Change',
+    y = 'Frequency'
+  ) +
+  theme_minimal()
+```
+
+## 3.7 Which maps are most played for each game mode?
+
+```{r, warning=FALSE}
+
+# Calculate map usage frequencies
+map_usage <- data |> 
+  group_by(map) |> 
+  summarise(count = n(), .groups = 'drop') |> 
+  arrange(desc(count)) |> 
+  slice_head(n = 9)  # Select the top 9 most popular maps
+
+# Filter data for only the top 9 maps
+top_map_data <- data |> 
+  filter(map %in% map_usage$map)
+
+# Group by map and brawler, limit to top 5 brawlers per map
+brawler_usage <- top_map_data |> 
+  group_by(map, star_player_brawler_name) |> 
+  summarise(count = n(), .groups = 'drop') |> 
+  arrange(map, desc(count)) |> 
+  group_by(map) |> 
+  slice_max(order_by = count, n = 5)  # Select the top 5 brawlers per map
+
+# Plot the data
+ggplot(brawler_usage, aes(x = reorder(star_player_brawler_name, count), y = count, fill = map)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  facet_wrap(~map, scales = 'free_y') +
+  theme_minimal() +
+  scale_fill_brewer(palette = 'Set3') +  # Adjust palette as needed
+  labs(
+    title = 'Top 5 Brawlers for Top 9 Maps',
+    x = 'Brawler',
+    y = 'Count'
+  ) +
+  theme(
+    axis.text.y = element_text(size = 10),
+    strip.text = element_text(size = 12),
+    plot.margin = margin(10, 10, 10, 50)
+  )
+```
+
+## 3.8 How do the average brawler levels vary across game modes?
+
+```{r, warning=FALSE}
+
+library(tidyr)
+
+power_levels <- data |> 
+  select(battle_mode, contains("_brawler_power")) |> 
+  pivot_longer(cols = starts_with("team"), names_to = "player", values_to = "power_level") |> 
+  group_by(battle_mode) |> 
+  summarise(avg_power_level = mean(power_level, na.rm = TRUE), .groups = 'drop')
+
+ggplot(power_levels, aes(x = reorder(battle_mode, avg_power_level), y = avg_power_level, fill = battle_mode)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  labs(title = 'Average Brawler Power Level by Game Mode', x = 'Game Mode', y = 'Average Power Level') +
+  theme_minimal()
+```
+
+## 3.9 What times of day is the game played the most globally (UTC)?
+
+```{r, warning=FALSE}
+
+# Extract the hour from battle_time
+data <- data |> 
+  mutate(hour = as.integer(substr(battle_time, 10, 11)))
+
+# Count matches by hour
+matches_by_hour <- data |> 
+  group_by(hour) |> 
+  summarise(match_count = n(), .groups = 'drop')
+
+# Plot match frequency by hour
+ggplot(matches_by_hour, aes(x = hour, y = match_count)) +
+  geom_line(color = 'blue', size = 1) +
+  geom_point(color = 'red', size = 2) +
+  labs(title = 'Most Frequent Times of Day to Play the Game Globally', x = 'Hour of the Day (UTC)', y = 'Number of Matches') +
+  theme_minimal()
+```
+
+## 3.10 How do matches differ by hour of the day?
+
+```{r, warning=FALSE}
+## Heatmap of Match Durations by Hour of the Day (Fully Fixed)
+
+# Extract the hour from the datetime string (assuming ISO 8601 format)
+data <- data |> 
+  mutate(hour_24 = as.integer(substr(battle_time, 10, 11)),  # Correctly extract hour as 24-hour format
+         hour_12 = ifelse(hour_24 == 0, 12, hour_24 %% 12),  # Convert to 12-hour format
+         period = ifelse(hour_24 < 12, 'AM', 'PM'),          # Add AM/PM period
+         hour_am_pm = paste(hour_12, period))               # Combine 12-hour and period for better labels
+
+# Remove rows with missing or malformed battle_time values
+data <- data |> filter(!is.na(hour_am_pm) & !is.na(battle_duration))
+
+data <- data |> 
+  mutate(hour_am_pm = factor(hour_am_pm, 
+                             levels = c('12 AM', paste(1:11, 'AM'), '12 PM', paste(1:11, 'PM'))))
+
+# Ensure clean data processing
+data <- data |> 
+  filter(!is.na(hour_am_pm) & 
+         !is.na(battle_duration) & 
+         !is.na(battle_mode))
+# Calculate average match duration by hour and battle mode
+match_duration_heatmap <- data |> 
+  group_by(hour_am_pm, battle_mode) |> 
+  summarise(avg_duration = mean(battle_duration, na.rm = TRUE), .groups = 'drop')
+
+# Create a complete grid of all hours and modes
+complete_grid <- expand.grid(
+  hour_am_pm = factor(c('12 AM', paste(1:11, 'AM'), '12 PM', paste(1:11, 'PM')), 
+                      levels = c('12 AM', paste(1:11, 'AM'), '12 PM', paste(1:11, 'PM'))),
+  battle_mode = unique(data$battle_mode)
+)
+
+# Merge the complete grid with the actual data
+match_duration_heatmap <- complete_grid |> 
+  left_join(match_duration_heatmap, by = c('hour_am_pm', 'battle_mode'))
+
+# Plot the heatmap
+ggplot(match_duration_heatmap, aes(x = hour_am_pm, y = battle_mode, fill = avg_duration)) +
+  geom_tile(color = "white") +  # Add gridlines for better visibility
+  scale_fill_viridis_c(option = "plasma", na.value = "gray") +  # Make NA values white
+  labs(title = 'Heatmap of Match Durations by Hour of the Day',
+       x = 'Hour of the Day',
+       y = 'Game Mode',
+       fill = 'Avg Duration (seconds)') +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels
+```
+
+# Summary
