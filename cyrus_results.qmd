@@ -167,6 +167,51 @@ plot_ly(
     yaxis = list(title = 'Win Rate')
   )
 ```
+```{r}
+role_mapping <- c(
+  # Damage Dealers
+  "CARL" = "Damage Dealers", "CHESTER" = "Damage Dealers", "CHUCK" = "Damage Dealers",
+  "CLANCY" = "Damage Dealers", "COLETTE" = "Damage Dealers", "COLT" = "Damage Dealers",
+  "EVE" = "Damage Dealers", "LOLA" = "Damage Dealers", "MOE" = "Damage Dealers",
+  "NITA" = "Damage Dealers", "PEARL" = "Damage Dealers", "R-T" = "Damage Dealers",
+  "RICO" = "Damage Dealers", "SHELLY" = "Damage Dealers", "SPIKE" = "Damage Dealers",
+  "SURGE" = "Damage Dealers", "TARA" = "Damage Dealers", "8-BIT" = "Damage Dealers",
+  
+  # Tanks
+  "DRACO" = "Tanks", "HANK" = "Tanks", "BUSTER" = "Tanks", "MEG" = "Tanks",
+  "ASH" = "Tanks", "JACKY" = "Tanks", "BIBI" = "Tanks", "ROSA" = "Tanks",
+  "FRANK" = "Tanks", "DARRYL" = "Tanks", "EL PRIMO" = "Tanks", "BULL" = "Tanks",
+  
+  # Marksmen
+  "ANGELO" = "Marksmen", "MAISIE" = "Marksmen", "MANDY" = "Marksmen", "BONNIE" = "Marksmen",
+  "JANET" = "Marksmen", "BELLE" = "Marksmen", "NANI" = "Marksmen", "BEA" = "Marksmen",
+  "PIPER" = "Marksmen", "BROCK" = "Marksmen",
+  
+  # Artillery
+  "JUJU" = "Artillery", "LARRY & LAWRIE" = "Artillery", "GROM" = "Artillery", "SPROUT" = "Artillery",
+  "TICK" = "Artillery", "PENNY" = "Artillery", "DYNAMIKE" = "Artillery", "BARLEY" = "Artillery",
+  
+  # Controllers
+  "CHARLIE" = "Controllers", "WILLOW" = "Controllers", "OTIS" = "Controllers", "GRIFF" = "Controllers",
+  "SQUEAK" = "Controllers", "LOU" = "Controllers", "AMBER" = "Controllers", "GALE" = "Controllers",
+  "MR. P" = "Controllers", "EMZ" = "Controllers", "SANDY" = "Controllers", "GENE" = "Controllers",
+  "BO" = "Controllers", "JESSIE" = "Controllers",
+  
+  # Assassins
+  "KENJI" = "Assassins", "LILY" = "Assassins", "MELODIE" = "Assassins", "MICO" = "Assassins",
+  "CORDIELUS" = "Assassins", "SAM" = "Assassins", "FANG" = "Assassins", "BUZZ" = "Assassins",
+  "STU" = "Assassins", "EDGAR" = "Assassins", "LEON" = "Assassins", "CROW" = "Assassins",
+  "MORTIS" = "Assassins", "SHADE" = "Assassins",
+  
+  # Supports
+  "BERRY" = "Supports", "KIT" = "Supports", "DOUG" = "Supports", "GRAY" = "Supports",
+  "GUS" = "Supports", "RUFFS" = "Supports", "BYRON" = "Supports", "MAX" = "Supports",
+  "PAM" = "Supports", "POCO" = "Supports"
+)
+pick_win_rates <- pick_win_rates |>
+  mutate(role = role_mapping[star_player_brawler_name])
+write.csv(pick_win_rates, "pick_win_rates_rolls.csv")
+```
 
 ## 3.6 Distribution of Trophy Changes by Game Mode
 
