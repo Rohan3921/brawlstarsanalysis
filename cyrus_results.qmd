@@ -400,19 +400,20 @@ ggplot(match_duration_heatmap, aes(x = hour_am_pm, y = battle_mode, fill = avg_d
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels
 ```
 
-Unfortunately, we have no data from 12pm. Bounty is consistent across every hour of the day, which cross references our boxplot graphs. Hotzone in general seems to have shorter durations, which correlates with our average win duration graph. It seems that between 2pm and 5pm would be the best time to play short matches with longer win rates. While most game modes stay relatively consistent, knockout's time seems to change drastically depending on the time of day. From 7 am to 8 am there is an extreme jump in length. Then again from 4pm to 6pm, there's a more gradual but still noticeable decline in time. This seems counter intuitive because 8am to 4pm is common work hours, where it would likely make sense to have shorter duration matches. \
+Unfortunately, we have no data from 12pm. Bounty is consistent across every hour of the day, which cross references our boxplot graphs. Hotzone in general seems to have shorter durations, which correlates with our average win duration graph. It seems that between 2pm and 5pm would be the best time to play short matches with longer win rates. While most game modes stay relatively consistent, knockout's time seems to change drastically depending on the time of day. From 7 am to 8 am there is an extreme jump in length. Then again from 4pm to 6pm, there's a more gradual but still noticeable decline in time. This seems counter intuitive because 8am to 4pm is common work hours, where it would likely make sense to have shorter duration matches.\
 
-# Summary 
-In summary, we were able to determine that \
--certain brawlers are more prevalent in certain modes \
--there are specific times and game modes to gain trophies faster and easier \
--unclear whether some game modes are easier than others \
+# Summary
+
+In summary, we were able to determine that\
+-certain brawlers are more prevalent in certain modes\
+-there are specific times and game modes to gain trophies faster and easier\
+-unclear whether some game modes are easier than others\
 -popular brawlers do not always have the highest win rates\
 
 # Interactive Graph Notes
 
-Our interactive graph displays all the brawlers in our dataset, colorcoded by their specific "class" from the game. We calculated their pick rates (how often a brawler is used) and their win rates and plotted them against each other. From there, we created 4 categories: \
-Overrated: high pick rate and low win rate \
-Easy to play: high pick rate and high win rate \
-Unpopular: low pick rate and low win rate \
-High Skill: low pick rate and high win rate \
+Our interactive graph displays all the brawlers in our dataset, colorcoded by their specific "class" from the game. We calculated their pick rates (how often a brawler is used) and their win rates and plotted them against each other. From there, we created 4 categories:\
+Overrated: high pick rate and low win rate\
+Easy to play: high pick rate and high win rate\
+Unpopular: low pick rate and low win rate\
+High Skill: low pick rate and high win rate\
