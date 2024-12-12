@@ -4,10 +4,37 @@
   * {
     font-family: sans-serif;
   }
+        .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      button {
+        margin: 0 5px;
+      }
 </style> 
 
 <div id="plot">
 </div>
+
+<!-- <div class="button-container"> -->
+<button id="filterButton">Show Win Rate > 60%</button>
+<button id="resetButton">Reset</button>
+<button id="region1">Overrated</button>
+<button id="region2">Easy to Play</button>
+<button id="region3">Unpopular</button>
+<button id="region4">High Skill</button>
+<!-- </div> -->
+
+<p>
+## Interactive Graph Notes
+
+Our interactive graph displays all the brawlers in our dataset, colorcoded by their specific "class" from the game. We calculated their pick rates (how often a brawler is used) and their win rates and plotted them against each other. From there, we created 4 categories:\
+Overrated: high pick rate and low win rate\
+Easy to play: high pick rate and high win rate\
+Unpopular: low pick rate and low win rate\
+High Skill: low pick rate and high win rate\
+</p>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="scripts/myscript.js"></script>

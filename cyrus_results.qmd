@@ -48,8 +48,10 @@ top_brawlers <- brawler_usage |>
   ungroup()
 
 # Use fct_infreq to ensure descending order of bars
+# top_brawlers <- top_brawlers |> 
+#   mutate(star_player_brawler_name = fct_reorder(star_player_brawler_name, -count))
 top_brawlers <- top_brawlers |> 
-  mutate(star_player_brawler_name = fct_infreq(star_player_brawler_name))
+  mutate(star_player_brawler_name = fct_reorder2(star_player_brawler_name, count, battle_mode))
 
 # Plot with fct_infreq ensuring correct order
 ggplot(top_brawlers, aes(x = star_player_brawler_name, y = count, fill = battle_mode)) +
@@ -62,8 +64,27 @@ ggplot(top_brawlers, aes(x = star_player_brawler_name, y = count, fill = battle_
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-From this plot, we can see how different brawlers can be heavily favored in some game modes compared to others. First, we see how modes like brawlBall, heist and knockout all have favored brawlers while the rest seem relatively evenly distributed. Knockout is a mode where kills are important, so nani--a marksmen--would be a good pick. Brawl ball is a soccer based mode, so mortis being a character with excellent mobility makes him a great pick. 
-## 3.2 How do player win rates vary by game mode?
+
+```{r}
+top_brawlers <- top_brawlers |>
+  group_by(battle_mode) |>
+  mutate(star_player_brawler_name = fct_reorder(star_player_brawler_name, count)) 
+# |>
+#   ungroup()
+
+ggplot(top_brawlers, aes(x = star_player_brawler_name, y = count, fill = battle_mode)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  facet_wrap(~battle_mode, scales = 'free_y') +
+  labs(title = 'Top 10 Star Player Brawlers by Frequency in Each Game Mode', 
+       x = 'Brawler', 
+       y = 'Frequency') +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+From this plot, we can see how different brawlers can be heavily favored in some game modes compared to others. First, we see how modes like brawlBall, heist and knockout all have favored brawlers while the rest seem relatively evenly distributed. Knockout is a mode where kills are important, so nani--a marksmen--would be a good pick. Brawl ball is a soccer based mode, so mortis being a character with excellent mobility makes him a great pick. \## 3.2 How do player win rates vary by game mode?
 
 ```{r, warning=FALSE}
 
@@ -94,7 +115,8 @@ ggplot(win_rates, aes(x = reorder(battle_mode, win_rate), y = win_rate - 0.5, fi
   ) +
   theme_minimal()
 ```
-Interestingly enough, the win rate for every game mode is above 50%. We took this to mean that our data is sampled from above average players of the game. From just this graph, it is difficult to tell if game modes like siege are easier to win compared to modes like knockout, if our sampled players are better at specific modes, or some other unspecified reason. 
+
+Interestingly enough, the win rate for every game mode is above 50%. We took this to mean that our data is sampled from above average players of the game. From just this graph, it is difficult to tell if game modes like siege are easier to win compared to modes like knockout, if our sampled players are better at specific modes, or some other unspecified reason.
 
 ## 3.3 What are the typical lengths of matches, and are there patterns tied to specific game modes?
 
@@ -109,7 +131,8 @@ ggplot(data, aes(x = reorder(battle_mode, battle_duration), y = battle_duration,
   labs(title = 'Match Durations by Game Mode', x = 'Game Mode', y = 'Duration (seconds)') +
   theme_minimal()
 ```
-All game modes have a specified time limit before they end automatically. Most modes also have a designated win condition that will terminate the game early. From this plot, we can see that brawl ball and knockout games seem to have the most variation in lengths, with hotzone and gem grab have smaller variations. We believe the time associated with bounty may be incorrect, as it is not logical for every bounty game to take exactly 2 minutes. 
+
+All game modes have a specified time limit before they end automatically. Most modes also have a designated win condition that will terminate the game early. From this plot, we can see that brawl ball and knockout games seem to have the most variation in lengths, with hotzone and gem grab have smaller variations. We believe the time associated with bounty may be incorrect, as it is not logical for every bounty game to take exactly 2 minutes.
 
 ## 3.4 Are there game modes that are both fast and frequently provide wins?
 
@@ -131,6 +154,7 @@ ggplot(combined_metrics, aes(x = avg_duration, y = win_rate, label = battle_mode
   labs(title = 'Win Rate vs. Average Match Duration', x = 'Average Match Duration (seconds)', y = 'Win Rate', subtitle = 'Modes with higher win rates and shorter durations are better for quick trophies') +
   theme_minimal()
 ```
+
 From this plot, a player would be able to determine which modes take the shortest amount of time and are the most likely to lead to wins. From this graph, it seems that hotzone would be the clear winner, but heist could also be a candidate. Knockout seems to be the worst pick, with the lowest win rate and a seemingly above average match duration.
 
 ## 3.5 How do win rates compare to pick rates for each brawler?
@@ -170,6 +194,7 @@ plot_ly(
     yaxis = list(title = 'Win Rate')
   )
 ```
+
 ```{r}
 role_mapping <- c(
   # Damage Dealers
@@ -238,8 +263,8 @@ ggplot(data, aes(x = trophy_change, fill = battle_mode)) +
   ) +
   theme_minimal()
 ```
-From these graphs, we can see that many of the trophy changes seem to be slightly left-skewed (a concentration of points on the right). As we discussed previously, this is likely because our sample of data is from higher skill players. Bounty, siege, and heist seem to be the most left-skewed. Gem grad and knockout seem to be more evenly balanced, giving almost a quadratic shape. It is much harder to tie in these two game modes, so it make sense for the points to be concentration on either side of the zero. 
-## 3.7 Which maps are most played for each game mode?
+
+From these graphs, we can see that many of the trophy changes seem to be slightly left-skewed (a concentration of points on the right). As we discussed previously, this is likely because our sample of data is from higher skill players. Bounty, siege, and heist seem to be the most left-skewed. Gem grad and knockout seem to be more evenly balanced, giving almost a quadratic shape. It is much harder to tie in these two game modes, so it make sense for the points to be concentration on either side of the zero. \## 3.7 Which maps are most played for each game mode?
 
 ```{r, warning=FALSE}
 
@@ -280,6 +305,7 @@ ggplot(brawler_usage, aes(x = reorder(star_player_brawler_name, count), y = coun
     plot.margin = margin(10, 10, 10, 50)
   )
 ```
+
 From this data, we can see how different brawlers are favored across the 9 most popular maps. For most of them, a brawler is not heavily favored. For some of the maps, the most favored brawler also correlates with the common game mode (bank shot and mortis are brawl ball while kaboom canyon and colette are heist).
 
 ## 3.8 How do the average brawler levels vary across game modes?
@@ -300,8 +326,8 @@ ggplot(power_levels, aes(x = reorder(battle_mode, avg_power_level), y = avg_powe
   labs(title = 'Average Brawler Power Level by Game Mode', x = 'Game Mode', y = 'Average Power Level') +
   theme_minimal()
 ```
-In general, it seems that the average power level for brawlers is nearly 10 across all game modes. Brawl ball is slightly lower and knockout seems to be noticeably lower. Knockout is a very skill based mode, where it is a direct 3v3, and if a player dies, they are out until a team is eliminated. This does not seem to give any insight into why it would have a lower average power level.
-## 3.9 What times of day is the game played the most globally (UTC)?
+
+In general, it seems that the average power level for brawlers is nearly 10 across all game modes. Brawl ball is slightly lower and knockout seems to be noticeably lower. Knockout is a very skill based mode, where it is a direct 3v3, and if a player dies, they are out until a team is eliminated. This does not seem to give any insight into why it would have a lower average power level. \## 3.9 What times of day is the game played the most globally (UTC)?
 
 ```{r, warning=FALSE}
 
@@ -321,8 +347,8 @@ ggplot(matches_by_hour, aes(x = hour, y = match_count)) +
   labs(title = 'Most Frequent Times of Day to Play the Game Globally', x = 'Hour of the Day (UTC)', y = 'Number of Matches') +
   theme_minimal()
 ```
-From this graph, we can see that the majority of matches appear to be played between 12 UTC and 16 UTC. We believe the data was sampled from ranked leaderboard players, so this likely correlates with the timezone the ranked players are from. We were intrigued that there is only one spike in the data, which would imply that one timezone contributes to the majority of the matches. It is possible this correlates with the end of the work day.
-## 3.10 How do matches differ by hour of the day?
+
+From this graph, we can see that the majority of matches appear to be played between 12 UTC and 16 UTC. We believe the data was sampled from ranked leaderboard players, so this likely correlates with the timezone the ranked players are from. We were intrigued that there is only one spike in the data, which would imply that one timezone contributes to the majority of the matches. It is possible this correlates with the end of the work day. \## 3.10 How do matches differ by hour of the day?
 
 ```{r, warning=FALSE}
 ## Heatmap of Match Durations by Hour of the Day (Fully Fixed)
@@ -373,10 +399,6 @@ ggplot(match_duration_heatmap, aes(x = hour_am_pm, y = battle_mode, fill = avg_d
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels
 ```
-Unfortunately, we have no data from 12pm. Bounty is consistent across every hour of the day, which cross references our boxplot graphs. Hotzone in general seems to have shorter durations, which correlates with our average win duration graph. It seems that between 2pm and 5pm would be the best time to play short matches with longer win rates. While most game modes stay relatively consistent, knockout's time seems to change drastically depending on the time of day. From 7 am to 8 am there is an extreme jump in length. Then again from 4pm to 6pm, there's a more gradual but still noticeable decline in time. This seems counter intuitive because 8am to 4pm is common work hours, where it would likely make sense to have shorter duration matches.
-# Summary
-In summary, we were able to determine that 
--certain brawlers are more prevalent in certain modes
--there are specific times and game modes to gain trophies faster and easier
--unclear whether some game modes are easier than others 
--popular brawlers do not always have the highest win rates
+
+Unfortunately, we have no data from 12pm. Bounty is consistent across every hour of the day, which cross references our boxplot graphs. Hotzone in general seems to have shorter durations, which correlates with our average win duration graph. It seems that between 2pm and 5pm would be the best time to play short matches with longer win rates. While most game modes stay relatively consistent, knockout's time seems to change drastically depending on the time of day. From 7 am to 8 am there is an extreme jump in length. Then again from 4pm to 6pm, there's a more gradual but still noticeable decline in time. This seems counter intuitive because 8am to 4pm is common work hours, where it would likely make sense to have shorter duration matches.\
+

@@ -96,8 +96,9 @@ ggplot(null_power_levels, aes(x = reorder(battle_mode, -n), y = n)) +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"), axis.text.x = element_text(size = 10, angle = 45, hjust = 1), axis.title = element_text(size = 12))
 ```
-**Null and Missing Values**:  
-    -   Some rows have missing player names or brawler details.  
-    -   'power_level' usually should never be null, since all brawlers have a power level between 1 and 11 (10 in the data), however, there are many null power levels in the data.  
-    -   In most game modes, there are three brawlers per team, and the data contains the 'power_level' for each brawler. However, soloShowdown and duoShowdown only have 1 and 2 brawlers per team respectively, so it is expected for those modes to have more null values.  
-    -   Similarly, undefined values in 'battle_mode' and 'battle_result' raise questions about data quality.
+
+**Null and Missing Values**:\
+- Some rows have missing player names or brawler details.\
+- 'power_level' usually should never be null, since all brawlers have a power level between 1 and 11 (10 in the data), however, there are many null power levels in the data.\
+- In most game modes, there are three brawlers per team, and the data contains the 'power_level' for each brawler. However, soloShowdown and duoShowdown only have 1 and 2 brawlers per team respectively, so it is expected for those modes to have more null values.\
+- Similarly, undefined values in 'battle_mode' and 'battle_result' raise questions about data quality.
