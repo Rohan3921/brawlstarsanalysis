@@ -145,7 +145,13 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#interactive-graph-notes" id="toc-interactive-graph-notes" class="nav-link active" data-scroll-target="#interactive-graph-notes"><span class="header-section-number">4.1</span> Interactive Graph Notes</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Rohan3921/brawlstarsanalysis.git/edit/main/d3graph.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Rohan3921/brawlstarsanalysis.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -173,6 +179,14 @@ ul.task-list li input[type="checkbox"] {
   * {
     font-family: sans-serif;
   }
+        .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      button {
+        margin: 0 5px;
+      }
 </style>
 <div id="plot">
 
@@ -185,10 +199,21 @@ ul.task-list li input[type="checkbox"] {
   &lt;button id="region3"&gt;Unpopular&lt;/button&gt;
   &lt;button id="region4"&gt;High Skill&lt;/button&gt;</code></pre>
 </div>
+<p>
+</p><section id="interactive-graph-notes" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="interactive-graph-notes"><span class="header-section-number">4.1</span> Interactive Graph Notes</h2>
+Our interactive graph displays all the brawlers in our dataset, colorcoded by their specific “class” from the game. We calculated their pick rates (how often a brawler is used) and their win rates and plotted them against each other. From there, we created 4 categories:<br>
+Overrated: high pick rate and low win rate<br>
+Easy to play: high pick rate and high win rate<br>
+Unpopular: low pick rate and low win rate<br>
+High Skill: low pick rate and high win rate<br>
+
+<p></p>
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="scripts/myscript.js"></script>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -620,7 +645,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/Rohan3921/brawlstarsanalysis.git/edit/main/d3graph.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Rohan3921/brawlstarsanalysis.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Rohan3921/brawlstarsanalysis.git/edit/main/d3graph.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Rohan3921/brawlstarsanalysis.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

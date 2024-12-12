@@ -44,9 +44,29 @@
     "href": "d3graph.html",
     "title": "4  Interactive graph",
     "section": "",
-    "text": "&lt;button id=\"filterButton\"&gt;Show Win Rate &gt; 60%&lt;/button&gt;\n  &lt;button id=\"resetButton\"&gt;Reset&lt;/button&gt;\n  &lt;button id=\"region1\"&gt;Overrated&lt;/button&gt;\n  &lt;button id=\"region2\"&gt;Easy to Play&lt;/button&gt;\n  &lt;button id=\"region3\"&gt;Unpopular&lt;/button&gt;\n  &lt;button id=\"region4\"&gt;High Skill&lt;/button&gt;",
+    "text": "4.1 Interactive Graph Notes",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Interactive graph</span>"
+    ]
+  },
+  {
+    "objectID": "d3graph.html#interactive-graph-notes",
+    "href": "d3graph.html#interactive-graph-notes",
+    "title": "4  Interactive graph",
+    "section": "",
+    "text": "Our interactive graph displays all the brawlers in our dataset, colorcoded by their specific “class” from the game. We calculated their pick rates (how often a brawler is used) and their win rates and plotted them against each other. From there, we created 4 categories:\nOverrated: high pick rate and low win rate\nEasy to play: high pick rate and high win rate\nUnpopular: low pick rate and low win rate\nHigh Skill: low pick rate and high win rate",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Interactive graph</span>"
+    ]
+  },
+  {
+    "objectID": "conclusion.html",
+    "href": "conclusion.html",
+    "title": "5  Conclusion",
+    "section": "",
+    "text": "In summary, we were able to determine that\n-certain brawlers are more prevalent in certain modes\n-there are specific times and game modes to gain trophies faster and easier\n-unclear whether some game modes are easier than others\n-popular brawlers do not always have the highest win rates\n\nOverall, this dataset shows that all players trend upwards in trophies. We determined that specific combinations of times, brawlers, maps and game modes were favorable for gaining trophies, at least for high skill players. While this data set seems to be comprised of higher skill players, the game seems to be generally fair from our analysis.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Conclusion</span>"
     ]
   }
 ]
