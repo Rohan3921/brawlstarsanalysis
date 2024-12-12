@@ -1,14 +1,13 @@
 ---
-title: "3 Results"
+title: "Results"
 format: html
 editor: visual
 ---
 
-# 3 Results
 
 This section highlights key findings from our exploratory data analysis (EDA) on the Brawl Stars dataset.
 
-## 3.1 Which brawlers are most frequently used by players, and how does this change across different game modes?
+## Which brawlers are most frequently used by players, and how does this change across different game modes?
 
 ```{r, warning=FALSE}
 library(dplyr)
@@ -76,7 +75,7 @@ From this plot, we can see how different brawlers can be heavily favored in some
 
 Note: the ordering is not consistent across facets because each mode will have a different set of top 10 brawlers.
 
-## 3.2 How do player win rates vary by game mode?
+## How do player win rates vary by game mode?
 
 ```{r, warning=FALSE}
 
@@ -103,7 +102,7 @@ ggplot(win_rates, aes(x = reorder(battle_mode, win_rate), y = win_rate - 0.5, fi
 
 Interestingly enough, the win rate for every game mode is above 50%. We took this to mean that our data is sampled from above average players of the game. From just this graph, it is difficult to tell if game modes like siege are easier to win compared to modes like knockout, if our sampled players are better at specific modes, or some other unspecified reason.
 
-## 3.3 What are the typical lengths of matches, and are there patterns tied to specific game modes?
+## What are the typical lengths of matches, and are there patterns tied to specific game modes?
 
 ```{r, warning=FALSE}
 library(viridis)
@@ -119,7 +118,7 @@ ggplot(data, aes(x = reorder(battle_mode, battle_duration), y = battle_duration,
 
 All game modes have a specified time limit before they end automatically. Most modes also have a designated win condition that will terminate the game early. From this plot, we can see that brawl ball and knockout games seem to have the most variation in lengths, with hotzone and gem grab have smaller variations. We believe the time associated with bounty may be incorrect, as it is not logical for every bounty game to take exactly 2 minutes. It is interesting that gemGrab and hotZone have so many outliers on the longer end of the duration, since their time limits aren't as strict as any of the other modes.
 
-## 3.4 Are there game modes that are both fast and frequently provide wins?
+## Are there game modes that are both fast and frequently provide wins?
 
 ```{r, warning=FALSE}
 
@@ -142,7 +141,7 @@ ggplot(combined_metrics, aes(x = avg_duration, y = win_rate, label = battle_mode
 
 From this plot, a player would be able to determine which modes take the shortest amount of time and are the most likely to lead to wins. From this graph, it seems that hotzone would be the clear winner, but heist could also be a candidate. Knockout seems to be the worst pick, with the lowest win rate and a seemingly above average match duration.
 
-## 3.5 Distribution of Trophy Changes by Game Mode
+## Distribution of Trophy Changes by Game Mode
 
 ```{r, warning=FALSE}
 
@@ -159,7 +158,7 @@ ggplot(data, aes(x = trophy_change, fill = battle_mode)) +
 
 From these graphs, we can see that many of the trophy changes seem to be slightly left-skewed (a concentration of points on the right). As we discussed previously, this is likely because our sample of data is from higher skill players. Bounty, siege, and heist seem to be the most left-skewed. Gem grad and knockout seem to be more evenly balanced, giving almost a quadratic shape. It is much harder to tie in these two game modes, so it make sense for the points to be concentration on either side of the zero.
 
-## 3.6 Which maps are most played for each game mode?
+## Which maps are most played for each game mode?
 
 ```{r, warning=FALSE}
 
@@ -205,7 +204,7 @@ ggplot(brawler_usage, aes(x = reorder(star_player_brawler_name, count), y = coun
 
 From this data, we can see how different brawlers are favored across the 9 most popular maps. For most of them, a brawler is not heavily favored. For some of the maps, the most favored brawler also correlates with the common game mode (bank shot and mortis are brawl ball while kaboom canyon and colette are heist).
 
-## 3.7 Which maps have the best win rates?
+## Which maps have the best win rates?
 
 ```{r, warning=FALSE}
 
@@ -232,7 +231,7 @@ ggplot(map_win_rate, aes(x = reorder(map, win_rate), y = win_rate - 0.5, fill = 
 
 We can see that maps differ vastly in win rates within this dataset. Maps like Split Difference and Goldarm Gulch are exactly 100%, whereas Ends Meet and Olive Branch are exactly 0%. This indicates that these maps may cater excessively to specific strategies or team compositions. The balanced maps such as Hot Potato and Crimewater are right around 50%, suggesting that some maps can truly be an even playing field. This demonstrates how significantly map design can effect win rates and point to opportunities to optimize or balance maps with higher deviations. The sampled players may also have been particularly favored on specific battle maps, or certain maps may have been less played overall leading to skewed overall win rates.
 
-## 3.8 How do the average brawler levels vary across game modes?
+## How do the average brawler levels vary across game modes?
 
 ```{r, warning=FALSE}
 
@@ -251,7 +250,7 @@ ggplot(power_levels, aes(x = reorder(battle_mode, avg_power_level), y = avg_powe
 
 In general, it seems that the average power level for brawlers is nearly 10 across all game modes. Brawl ball is slightly lower and knockout seems to be noticeably lower. Knockout is a very skill based mode, where it is a direct 3v3, and if a player dies, they are out until a team is eliminated. This does not seem to give any insight into why it would have a lower average power level. One theory would be that people push trophies on their lower level brawlers in knockout since it's a higher skill mode.
 
-## 3.9 What times of day is the game played the most globally (UTC)?
+## What times of day is the game played the most globally (UTC)?
 
 ```{r, warning=FALSE}
 
@@ -274,7 +273,7 @@ ggplot(matches_by_hour, aes(x = hour, y = match_count)) +
 
 From this graph, we can see that the majority of matches appear to be played between 12 UTC and 16 UTC. We believe the data was sampled from ranked leaderboard players, so this likely correlates with the timezone the ranked players are from. We were intrigued that there is only one spike in the data, which would imply that one timezone contributes to the majority of the matches. It is possible this correlates with the end of the work day.
 
-## 3.10 How do matches differ by hour of the day?
+## How do matches differ by hour of the day?
 
 ```{r, warning=FALSE}
 # extract hour

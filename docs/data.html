@@ -183,18 +183,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data"><span class="header-section-number">3</span> Data</a>
+  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data"><span class="header-section-number">2.1</span> Data</a>
   <ul class="collapse">
-  <li><a href="#technical-description" id="toc-technical-description" class="nav-link" data-scroll-target="#technical-description"><span class="header-section-number">3.1</span> 2.1 Technical Description</a>
-  <ul class="collapse">
-  <li><a href="#key-information" id="toc-key-information" class="nav-link" data-scroll-target="#key-information"><span class="header-section-number">3.1.1</span> Key Information:</a></li>
-  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges"><span class="header-section-number">3.1.2</span> Challenges:</a></li>
-  <li><a href="#summary-of-columns" id="toc-summary-of-columns" class="nav-link" data-scroll-target="#summary-of-columns"><span class="header-section-number">3.1.3</span> Summary of Columns:</a></li>
+  <li><a href="#technical-description" id="toc-technical-description" class="nav-link" data-scroll-target="#technical-description"><span class="header-section-number">2.1.1</span> Technical Description</a></li>
+  <li><a href="#key-information" id="toc-key-information" class="nav-link" data-scroll-target="#key-information"><span class="header-section-number">2.1.2</span> Key Information:</a></li>
+  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges"><span class="header-section-number">2.1.3</span> Challenges:</a></li>
+  <li><a href="#summary-of-columns" id="toc-summary-of-columns" class="nav-link" data-scroll-target="#summary-of-columns"><span class="header-section-number">2.1.4</span> Summary of Columns:</a></li>
   </ul></li>
-  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">3.2</span> 2.2 Missing Value Analysis</a>
+  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.2</span> Missing Value Analysis</a>
   <ul class="collapse">
-  <li><a href="#missing-values-by-column" id="toc-missing-values-by-column" class="nav-link" data-scroll-target="#missing-values-by-column"><span class="header-section-number">3.2.1</span> Missing Values by Column</a></li>
-  </ul></li>
+  <li><a href="#missing-values-by-column" id="toc-missing-values-by-column" class="nav-link" data-scroll-target="#missing-values-by-column"><span class="header-section-number">2.2.1</span> Missing Values by Column</a></li>
+  <li><a href="#d3-code-preparation" id="toc-d3-code-preparation" class="nav-link" data-scroll-target="#d3-code-preparation"><span class="header-section-number">2.2.2</span> d3 Code Preparation<br>
+  </a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Rohan3921/brawlstarsanalysis.git/edit/main/data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Rohan3921/brawlstarsanalysis.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -221,13 +221,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="data" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Data</h1>
-<section id="technical-description" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">3.1</span> 2.1 Technical Description</h2>
+<section id="data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="data"><span class="header-section-number">2.1</span> Data</h2>
+<section id="technical-description" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">2.1.1</span> Technical Description</h3>
 <p>The dataset used for this project contains detailed logs of matches from the mobile game Brawl Stars, developed by Supercell. The data provides valuable insights into gameplay mechanics, player behavior, and match outcomes.</p>
-<section id="key-information" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="key-information"><span class="header-section-number">3.1.1</span> Key Information:</h3>
+</section>
+<section id="key-information" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="key-information"><span class="header-section-number">2.1.2</span> Key Information:</h3>
 <ul>
 <li><strong>Source</strong>: The dataset was obtained from <a href="https://www.kaggle.com/datasets/sirwerto/brawlstars-battlelog/data">Kaggle</a>, where it was shared in JSON format.</li>
 <li><strong>Format</strong>: Our preprocessed dataset is in CSV format, with 40+ columns capturing details about players, brawlers, match outcomes, and game modes.</li>
@@ -239,8 +240,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 </section>
-<section id="challenges" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="challenges"><span class="header-section-number">3.1.2</span> Challenges:</h3>
+<section id="challenges" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="challenges"><span class="header-section-number">2.1.3</span> Challenges:</h3>
 <p>We are also pursuing gathering our own data via API, but gathering such a sizeable dataset is challenging since real player IDs must be individually specified, unless we access player IDs via the top rankings table, in which case, the data will be heavily skewed towards high skilled, high trophy game play which is different from how many/most players play.</p>
 <p>In the current dataset, we are facing the following challenges:</p>
 <ol type="1">
@@ -258,8 +259,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ol>
 </section>
-<section id="summary-of-columns" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="summary-of-columns"><span class="header-section-number">3.1.3</span> Summary of Columns:</h3>
+<section id="summary-of-columns" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="summary-of-columns"><span class="header-section-number">2.1.4</span> Summary of Columns:</h3>
 <p>Our dataset has detailed logs of matches, including:</p>
 <ol type="1">
 <li>Player &amp; brawler information
@@ -279,10 +280,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="missing-value-analysis" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">3.2</span> 2.2 Missing Value Analysis</h2>
-<section id="missing-values-by-column" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="missing-values-by-column"><span class="header-section-number">3.2.1</span> Missing Values by Column</h3>
+<section id="missing-value-analysis" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.2</span> Missing Value Analysis</h2>
+<section id="missing-values-by-column" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="missing-values-by-column"><span class="header-section-number">2.2.1</span> Missing Values by Column</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -343,9 +344,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 - ‘power_level’ usually should never be null, since all brawlers have a power level between 1 and 11 (10 in the data), however, there are many null power levels in the data.<br>
 - In most game modes, there are three brawlers per team, and the data contains the ‘power_level’ for each brawler. However, soloShowdown and duoShowdown only have 1 and 2 brawlers per team respectively, so it is expected for those modes to have more null values.<br>
 - Similarly, undefined values in ‘battle_mode’ and ‘battle_result’ raise questions about data quality.</p>
-
-
 </section>
+<section id="d3-code-preparation" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="d3-code-preparation"><span class="header-section-number">2.2.2</span> d3 Code Preparation<br>
+</h3>
+<p>Code that we used to create the dataset needed for the d3 visualization:<br>
+</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>role_mapping <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Damage Dealers</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CARL"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"CHESTER"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"CHUCK"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CLANCY"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"COLETTE"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"COLT"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"EVE"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"LOLA"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"MOE"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NITA"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"PEARL"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"R-T"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"RICO"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"SHELLY"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"SPIKE"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"SURGE"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"TARA"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>, <span class="st">"8-BIT"</span> <span class="ot">=</span> <span class="st">"Damage Dealers"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Tanks</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DRACO"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>, <span class="st">"HANK"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>, <span class="st">"BUSTER"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>, <span class="st">"MEG"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ASH"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>, <span class="st">"JACKY"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>, <span class="st">"BIBI"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>, <span class="st">"ROSA"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FRANK"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>, <span class="st">"DARRYL"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>, <span class="st">"EL PRIMO"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>, <span class="st">"BULL"</span> <span class="ot">=</span> <span class="st">"Tanks"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Marksmen</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ANGELO"</span> <span class="ot">=</span> <span class="st">"Marksmen"</span>, <span class="st">"MAISIE"</span> <span class="ot">=</span> <span class="st">"Marksmen"</span>, <span class="st">"MANDY"</span> <span class="ot">=</span> <span class="st">"Marksmen"</span>, <span class="st">"BONNIE"</span> <span class="ot">=</span> <span class="st">"Marksmen"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"JANET"</span> <span class="ot">=</span> <span class="st">"Marksmen"</span>, <span class="st">"BELLE"</span> <span class="ot">=</span> <span class="st">"Marksmen"</span>, <span class="st">"NANI"</span> <span class="ot">=</span> <span class="st">"Marksmen"</span>, <span class="st">"BEA"</span> <span class="ot">=</span> <span class="st">"Marksmen"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"PIPER"</span> <span class="ot">=</span> <span class="st">"Marksmen"</span>, <span class="st">"BROCK"</span> <span class="ot">=</span> <span class="st">"Marksmen"</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Artillery</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"JUJU"</span> <span class="ot">=</span> <span class="st">"Artillery"</span>, <span class="st">"LARRY &amp; LAWRIE"</span> <span class="ot">=</span> <span class="st">"Artillery"</span>, <span class="st">"GROM"</span> <span class="ot">=</span> <span class="st">"Artillery"</span>, <span class="st">"SPROUT"</span> <span class="ot">=</span> <span class="st">"Artillery"</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"TICK"</span> <span class="ot">=</span> <span class="st">"Artillery"</span>, <span class="st">"PENNY"</span> <span class="ot">=</span> <span class="st">"Artillery"</span>, <span class="st">"DYNAMIKE"</span> <span class="ot">=</span> <span class="st">"Artillery"</span>, <span class="st">"BARLEY"</span> <span class="ot">=</span> <span class="st">"Artillery"</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Controllers</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CHARLIE"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>, <span class="st">"WILLOW"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>, <span class="st">"OTIS"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>, <span class="st">"GRIFF"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"SQUEAK"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>, <span class="st">"LOU"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>, <span class="st">"AMBER"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>, <span class="st">"GALE"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MR. P"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>, <span class="st">"EMZ"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>, <span class="st">"SANDY"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>, <span class="st">"GENE"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BO"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>, <span class="st">"JESSIE"</span> <span class="ot">=</span> <span class="st">"Controllers"</span>,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Assassins</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"KENJI"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>, <span class="st">"LILY"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>, <span class="st">"MELODIE"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>, <span class="st">"MICO"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>,</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CORDIELUS"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>, <span class="st">"SAM"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>, <span class="st">"FANG"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>, <span class="st">"BUZZ"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>,</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"STU"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>, <span class="st">"EDGAR"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>, <span class="st">"LEON"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>, <span class="st">"CROW"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>,</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MORTIS"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>, <span class="st">"SHADE"</span> <span class="ot">=</span> <span class="st">"Assassins"</span>,</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Supports</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BERRY"</span> <span class="ot">=</span> <span class="st">"Supports"</span>, <span class="st">"KIT"</span> <span class="ot">=</span> <span class="st">"Supports"</span>, <span class="st">"DOUG"</span> <span class="ot">=</span> <span class="st">"Supports"</span>, <span class="st">"GRAY"</span> <span class="ot">=</span> <span class="st">"Supports"</span>,</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GUS"</span> <span class="ot">=</span> <span class="st">"Supports"</span>, <span class="st">"RUFFS"</span> <span class="ot">=</span> <span class="st">"Supports"</span>, <span class="st">"BYRON"</span> <span class="ot">=</span> <span class="st">"Supports"</span>, <span class="st">"MAX"</span> <span class="ot">=</span> <span class="st">"Supports"</span>,</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">"PAM"</span> <span class="ot">=</span> <span class="st">"Supports"</span>, <span class="st">"POCO"</span> <span class="ot">=</span> <span class="st">"Supports"</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co"># pick_win_rates &lt;- pick_win_rates |&gt;</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(role = role_mapping[star_player_brawler_name])</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co">#  write.csv(pick_win_rates, "pick_win_rates_rolls.csv")</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co"># mean_pick_rate &lt;- mean(pick_win_rates$pick_rate, na.rm = TRUE)</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="co"># mean_win_rate &lt;- mean(pick_win_rates$win_rate, na.rm = TRUE)</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co"># print(paste("Mean Pick Rate:", mean_pick_rate))</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="co"># print(paste("Mean Win Rate:", mean_win_rate))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+
 </section>
 </section>
 
