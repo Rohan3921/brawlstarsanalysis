@@ -17,14 +17,14 @@
 <div id="plot">
 </div>
 
-<div class="button-container">
-      <button id="filterButton">Show Win Rate > 60%</button>
-      <button id="resetButton">Reset</button>
-      <button id="region1">Overrated</button>
-      <button id="region2">Easy to Play</button>
-      <button id="region3">Unpopular</button>
-      <button id="region4">High Skill</button>
-</div>
+<!-- <div class="button-container"> -->
+<button id="filterButton">Show Win Rate > 60%</button>
+<button id="resetButton">Reset</button>
+<button id="region1">Overrated</button>
+<button id="region2">Easy to Play</button>
+<button id="region3">Unpopular</button>
+<button id="region4">High Skill</button>
+<!-- </div> -->
 
 <p>
 ## Interactive Graph Notes
